@@ -182,9 +182,31 @@ public class MainController {
         String timeString = formattedTime;
         attendenceServices.officeOut(timeString, AttendStatus, User__ID,stringDate);
         session.setAttribute("Isattendace", attendence.getIsAttend());
-        System.out.println(attendence.getName());
-        System.out.println(attendence.getIsAttend());
         return "redirect:/attendence";
+    }
+    @GetMapping(value = "/token-details/{Token_Number}")
+    public String ViewTokenDetails(@PathVariable("Token_Number")String TokenNumber,Model model, HttpSession session){
+        model.addAttribute("tokendetails", tokenServices.getTokenByTokenNumber(TokenNumber));
+        return "TokenDetails";
+    }
+
+    @PostMapping(value="/update/token/{Token_Number}")
+    public String UpdateTokenStatus(@ModelAttribute("Token") Token token,@RequestParam("Status")String status,@PathVariable("Token_Number")String TokenNumber){
+        tokenServices.updateTokenStatus(TokenNumber, status);
+        return "redirect:/token-details/{Token_Number}";
+    }
+    @GetMapping(value = "/delete-token/{Token_Number}")
+    public String deleteToken(@PathVariable("Token_Number")String tokenNumber,Model model){
+        System.out.println(tokenNumber);
+        tokenServices.deleteToken(tokenNumber);
+        return "redirect:/all-token";
+    }
+
+    @PostMapping(value = "/search-token")
+    public String searchToken(@ModelAttribute("Token") Token token,@RequestParam("searchtoken") String Search,Model model){
+        List<Token> SearchTokenData =  tokenServices.SearchToken(Search.trim());
+        model.addAttribute("SearchData", SearchTokenData);
+        return "TokenSearch";
     }
 
 }

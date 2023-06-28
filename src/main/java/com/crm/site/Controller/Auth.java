@@ -1,5 +1,4 @@
 package com.crm.site.Controller;
-import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -34,15 +33,6 @@ public class Auth {
 
     @GetMapping(value = "/login")
     public String login(){
-        try {
-            InetAddress localHost = InetAddress.getLocalHost();
-            String ipAddress = localHost.getHostAddress();
-            String hostName = localHost.getHostName();
-            System.out.println("IP Address: " + ipAddress);
-            System.out.println("Host Name: " + hostName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return "login";
     }
     @GetMapping(value = "/create-admin")
@@ -73,7 +63,7 @@ public class Auth {
         users.setUserId(userid);
         users.setUserType("Admin");
         SimpleMailMessage messages = new SimpleMailMessage();
-        messages.setFrom("noreply.undergroundcoders@gmail.com");
+        messages.setFrom("workmate.system@gmail.com");
         messages.setTo(users.getEmail());
         messages.setText("Hi"+users.getName() +", Thanks for joining us");
         messages.setSubject("Notification About CRM");
@@ -107,7 +97,7 @@ public class Auth {
         userServices.creatUsers(users);
         session.setAttribute("alluser", userServices.getUsers());
         SimpleMailMessage messages = new SimpleMailMessage();
-        messages.setFrom("noreply.undergroundcoders@gmail.com");
+        messages.setFrom("workmate.system@gmail.com");
         messages.setTo(Email);
         messages.setText("Hi "+Name+ ",Welcome to Workmate.\nYour Account Created. Below we have Provided Your Login credentials\nYour Username :"+Email+"\nYour Password :" + RepeatPassword +"\nfor login you can follow this link : " +projecturl+"/login \n\n\n\n\n\nWorkmate is an office employment management app that provides a comprehensive solution for managing employee data in a company. It is designed to help businesses keep track of their employees' information, such as their personal details, work history, leave records, and more.\n\nWith Workmate, businesses can easily manage their employee database and keep it up-to-date with the latest information. It allows HR departments to efficiently manage employee information and automate routine HR tasks such as onboarding, performance tracking, and payroll processing.");
         messages.setSubject("Account Created | Workmate");

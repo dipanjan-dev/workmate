@@ -203,59 +203,59 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <c:forEach var="alluser" items="${AllToken}">
+                            <c:forEach var="SearchData" items="${SearchData}">
                             <tr>
                               <td data-label="Name" >
                                 <div class="d-flex py-1 align-items-center">
-                                    <span class="avatar avatar-sm me-2">${alluser.getName().charAt(0)}</span>
+                                    <span class="avatar avatar-sm me-2">${SearchData.getName().charAt(0)}</span>
                                   <div class="flex-fill">
-                                    <div class="font-weight-medium">${alluser.getName()}</div>
+                                    <div class="font-weight-medium">${SearchData.getName()}</div>
                                   </div>
                                 </div>
                               </td>
                               <td data-label="Title" >
-                                <div>${alluser.getUserId()}</div>
+                                <div>${SearchData.getUserId()}</div>
                               </td>
                               <td data-label="Title" >
-                                <div>${alluser.getCreatedAt()}</div>
+                                <div>${SearchData.getCreatedAt()}</div>
                               </td>
                               <td data-label="Title" >
-                                <div>${alluser.getToken_Number()}</div>
+                                <div>${SearchData.getToken_Number()}</div>
                               </td>
                               <td class="text-muted" data-label="Role" >
-                                <div>${alluser.getToken_id()}</div>
+                                <div>${SearchData.getToken_id()}</div>
                               </td>
                               <td class="text-muted" data-label="Role" >
-                                <div>          
-                                <c:if test="${alluser.getStatus()=='Under Review'}">
-                                  <span class="badge bg-warning">${alluser.getStatus()}</span>
-                                </c:if>
-
-                                <c:if test="${alluser.getStatus()=='In Process'}">
-                                  <span class="badge bg-info">${alluser.getStatus()}</span>
-                                </c:if>
-
-                                <c:if test="${alluser.getStatus()=='Paperwork Made'}">
-                                  <span class="badge bg-secondary">${alluser.getStatus()}</span>
-                                </c:if>
-
-                                <c:if test="${alluser.getStatus()=='Assign to Specific Department'}">
-                                  <span class="badge bg-primary">${alluser.getStatus()}</span>
-                                </c:if>         
-
-                                <c:if test="${alluser.getStatus()=='Resolved'}">
-                                  <span class="badge bg-success">${alluser.getStatus()}</span>
-                                </c:if>
+                                <div>
+                                    <c:if test="${SearchData.getStatus()=='Under Review'}">
+                                        <span class="badge bg-warning">${SearchData.getStatus()}</span>
+                                      </c:if>
+      
+                                      <c:if test="${SearchData.getStatus()=='In Process'}">
+                                        <span class="badge bg-info">${SearchData.getStatus()}</span>
+                                      </c:if>
+      
+                                      <c:if test="${SearchData.getStatus()=='Paperwork Made'}">
+                                        <span class="badge bg-secondary">${SearchData.getStatus()}</span>
+                                      </c:if>
+      
+                                      <c:if test="${SearchData.getStatus()=='Assign to Specific Department'}">
+                                        <span class="badge bg-primary">${SearchData.getStatus()}</span>
+                                      </c:if>         
+      
+                                      <c:if test="${SearchData.getStatus()=='Resolved'}">
+                                        <span class="badge bg-success">${SearchData.getStatus()}</span>
+                                      </c:if>
                                 </div>
                               </td>
                               <td>
                                 <div class="btn-list flex-nowrap">
-                                  <a href="/token-details/${alluser.getToken_Number()}" class="btn">
+                                  <a href="/token-details/${SearchData.getToken_Number()}" class="btn">
                                     View Details
                                   </a>
-                                  <a href="/delete-token/${alluser.getToken_Number()}" class="btn btn-danger">
+                                  <!-- <a href="/delete/token/${SearchData.getToken_Number()}" class="btn btn-danger">
                                     Reject Token
-                                  </a>
+                                  </a> -->
                                 </div>
                               </td>
                             </tr>

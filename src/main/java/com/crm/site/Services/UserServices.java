@@ -10,5 +10,6 @@ public interface UserServices {
     Users updateusers(Users user);
     List<Users> findUser(String UserId);
     Users getUserByEmail(String Email);
-    Users getUserBySomepara(String Email);
+    Users getUserViaUserID(String UserID);
+    void updatePassword(String Password,String UserID);
 }

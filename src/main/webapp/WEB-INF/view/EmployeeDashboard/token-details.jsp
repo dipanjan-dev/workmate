@@ -36,11 +36,7 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Set status</a>
-                <a href="#" class="dropdown-item">Profile & account</a>
-                <a href="#" class="dropdown-item">Feedback</a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">Settings</a>
+                <a href="/employee/settings" class="dropdown-item">Settings</a>
                 <a href="/logout" class="dropdown-item">Logout</a>
               </div>
             </div>
@@ -86,25 +82,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/employee/tasks" >
-                      <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-
-                 
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <path d="m7.5 4.21 4.5 2.6 4.5-2.6"></path>
-                                <path d="M7.5 19.79V14.6L3 12"></path>
-                                <path d="m21 12-4.5 2.6v5.19"></path>
-                                <path d="M3.27 6.96 12 12.01l8.73-5.05"></path>
-                                <path d="M12 22.08V12"></path>
-                              </svg>
-                      </span>
-                      <span class="nav-link-title">
-                        Tasks
-                      </span>
-                    </a>
-                  </li>
+           
                   <li class="nav-item">
                     <a class="nav-link" href="/attendence" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -188,8 +166,9 @@
                 </div>
                 <div class="col-lg-2 col-6">
                     <label class="form-label">Status</label>
-                    <span class="badge bg-warning">${tokendetails.getStatus()}</span>
-                    
+                    <%@include file="../TokenStatusView.jsp" %>
+
+
                 </div>
                 <div class="col-lg-12">
                     <label class="form-label">Issue</label>

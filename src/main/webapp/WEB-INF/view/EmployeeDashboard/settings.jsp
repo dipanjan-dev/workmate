@@ -1,18 +1,18 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${not empty userInfo}">
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Dashboard</title>
+    <title>${userInfo.getName()} | ${userInfo.getUserId()} </title>
     <!-- CSS files -->
-    <link href="../../../dist/css/tabler.min.css" rel="stylesheet"/>
-    <link href="../../../dist/css/tabler-flags.min.css" rel="stylesheet"/>
-    <link href="../../../dist/css/tabler-payments.min.css" rel="stylesheet"/>
-    <link href="../../../dist/css/tabler-vendors.min.css" rel="stylesheet"/>
-    <link href="../../../dist/css/demo.min.css" rel="stylesheet"/>
+    <link href=".././dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href=".././dist/css/tabler-flags.min.css" rel="stylesheet"/>
+    <link href=".././dist/css/tabler-payments.min.css" rel="stylesheet"/>
+    <link href=".././dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link href=".././dist/css/demo.min.css" rel="stylesheet"/>
   </head>
   <body >
     <div class="wrapper">
@@ -22,8 +22,8 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="#">
-              <img src="../../../static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            <a>
+              <img src=".././static/logo.svg"  height="20" alt="Tabler"  class="navbar-brand-image">
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -65,7 +65,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="/employee/token" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -82,7 +82,7 @@
                     </span>
                   </a>
                 </li>
-            
+             
                   <li class="nav-item">
                     <a class="nav-link" href="/attendence" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -101,7 +101,7 @@
                       </span>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item active">
                     <a class="nav-link" href="/employee/profile" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -131,133 +131,67 @@
                   Overview
                 </div>
                 <h2 class="page-title">
-                 Tokens
+                  Account Settings
                 </h2>
               </div>
               <!-- Page title actions -->
-              <div class="col-auto ms-auto d-print-none">
-                <div class="btn-list">
-                  <a href="/add-employee" class="btn btn-primary d-none d-sm-inline-block"  data-bs-toggle="modal" data-bs-target="#modal-report">
-                    Create New Token
-                  </a>
-                </div>
-              </div>
+            
             </div>
           </div>
         </div>
         <div class="page-body">
-          <div class="container-xl">
-            <!-- <p>${tokenlistSize} Token Has Been Submited</p> -->
-            <div class="card">
-              <div class="table-responsive">
-                <table class="table table-vcenter table-mobile-md card-table shadow">
-                  <thead>
-                    <tr>
-                      <th>Token Id</th>
-                      <th>Token Number</th>
-                      <th>Token Type</th>
-                      <th>Token Status</th>
-                      <th>Created At</th>
-                      <th class="w-1"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <c:forEach items="${tokenlist}" var="tokenlist">
-                    <tr>
-                      <td data-label="Name" >
-                            <div class="font-weight-medium">${tokenlist.getToken_id()}</div>
-                      </td>
-                      <td data-label="Title" >
-                        <div>${tokenlist.getToken_Number()}</div>
-                      </td>
-                      <td data-label="Title" >
-                        <div>${tokenlist.getTokenType()}</div>
-                      </td>
-                      <td class="text-muted" data-label="Role" >
-                        <div>
-                          <span class="badge bg-warning">${tokenlist.getStatus()}</span></div>
-                      </td>
-                      <td class="text-muted" data-label="Role" >
-                        <div>${tokenlist.getCreatedAt()}</div>
-                      </td>
-                      <td>
-                        <div class="btn-list flex-nowrap">
-                          <a href="view/token/${tokenlist.getToken_Number()}" class="btn">
-                            View Details
-                          </a>
-                          <a href="delete/token/${tokenlist.getToken_Number()}" class="btn btn-outline-danger">
-                            Withdrawal
-                          </a>
+            <div class="container-xl">
+                <div class="col-lg-8">
+                    <form class="card" action="employee/change-password" method="POST" >
+                      <div class="card-header border-bottom-0 bg-light">
+                        <h3 class="card-title">Change Password</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="mb-3 row">
+                          <label class="col-3 col-form-label required">Enter Your Old Password</label>
+                          <div class="col">
+                            <input type="password " class="form-control" placeholder="Enter Your Old Password" name="oldPassword">
+                          </div>
                         </div>
-                      </td>
-                    </tr>
-                </c:forEach>   
-         
-                  </tbody>
-                </table>
-              </div>
+                        <div class="mb-3 row">
+                          <label class="col-3 col-form-label required">Enter Your New Password</label>
+                          <div class="col">
+                            <input type="password" class="form-control" placeholder="Enter Your New Password" name="NewPassword">
+                            <small class="form-hint">
+                              Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                              spaces, special characters, or emoji.
+                            </small>
+                          </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-3 col-form-label required">Confirm Your New Password</label>
+                            <div class="col">
+                              <input type="password" class="form-control" placeholder="Confirm Your New Password" name="RepreatNewPassword">
+                              <small class="form-hint">
+                                Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                                spaces, special characters, or emoji.
+                              </small>
+                            </div>
+                          </div>
+                 
+                      <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                  </div>
            
-            </div>
+          
           </div>
         </div>
-
-
-
-        
       </div>
     </div>
-
-    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <form class="modal-content"  method="POST" action="/employee/token-create"  modelAttribute="Token">
-          <div class="modal-header">
-            <h5 class="modal-title">Create New Token</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">  
-            <div class="mb-3">
-              <input type="text" class="form-control"  name="Name" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getName()}">
-              <input type="text" class="form-control"  name="Email" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getEmail()}">
-              <input type="text" class="form-control"  name="Contact" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getContact()}">
-              <input type="text" class="form-control"  name="UserId" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getUserId()}">
-              <input type="text" class="form-control"  name="EmployeeType" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getEmployeeType()}">
-              <input type="text" class="form-control"  name="Department" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getDepartment()}">
-              <input type="text" class="form-control"  name="EmployeeRole" placeholder="Full Name" autocomplete="off" hidden value="${userInfo.getEmployeeRole()}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Issue Type</label>
-                <select class="form-select" name="TokenType">
-                  <option selected value="Personal Access Token">Personal Access Token</option>
-                  <option value="Security Token">Security Token</option>
-                  <option value="Payment Token">Payment Token</option>
-                  <option value="Asset Token">Asset Token</option>
-                  <option value="Issue Raise Token">Issue Raise Token</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Message</label>
-                <textarea name="Message" id="" class="form-control" rows="4"></textarea>
-              </div>     
-          </div>
-          <div class="modal-footer">
-            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-              Cancel
-            </a>
-            <button type="submit" class="btn btn-primary ms-auto">
-              Create New Token
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </c:if>
 
   <c:if test="${empty userInfo}">
     <c:redirect url="/login"/> 
   </c:if>
     <!-- Libs JS -->
-    <script src="../../../dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src=".././dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <!-- Tabler Core -->
-    <script src="../../../dist/js/tabler.min.js"></script>
+    <script src=".././dist/js/tabler.min.js"></script>
   </body>
 </html>

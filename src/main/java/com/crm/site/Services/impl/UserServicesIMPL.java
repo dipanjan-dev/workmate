@@ -60,9 +60,16 @@ public class UserServicesIMPL implements UserServices{
     }
 
     @Override
-    public Users getUserBySomepara(String Email) {
-       return null;
+    public Users getUserViaUserID(String UserID) {
+        return UserRepository.getUserViaUserID(UserID);
     }
+
+    @Override
+    public void updatePassword(String Password, String UserID) {
+        UserRepository.updatePassword(Password, UserID);
+    }
+
+  
 
   
     

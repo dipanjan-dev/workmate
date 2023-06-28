@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.crm.site.Model.Token;
+import com.crm.site.Model.Users;
 import com.crm.site.Services.TokenServices;
+import com.crm.site.Services.UserServices;
 @Controller
 @RequestMapping(value = "/employee")
 public class EmployeeController {
     @Autowired
     private JavaMailSender mailSender;
     private TokenServices tokenServices;
-    public EmployeeController(TokenServices tokenServices){
+    private UserServices userServices;
+    public EmployeeController(TokenServices tokenServices,UserServices userServices){
         super();
         this.tokenServices = tokenServices;
+        this.userServices = userServices;
     }
     @GetMapping(value = "/index")
     public String root(HttpSession session) throws NullPointerException{
@@ -40,12 +44,43 @@ public class EmployeeController {
         return "/EmployeeDashboard/Home";
     }
     
+    @GetMapping(value = "/settings")
+    public String settings(HttpSession session){
+        return "/EmployeeDashboard/settings";
+    }
+    @GetMapping(value = "/password-changed")
+    public String passwordChanged(HttpSession session){
+        return "/EmployeeDashboard/PasswordChanged";
+    }
+
+
+    @PostMapping(value = "employee/change-password")
+    public String changePassword(HttpSession session,@RequestParam("oldPassword") String oldPassword,@RequestParam("NewPassword") String NewPassword,@RequestParam("RepreatNewPassword") String RnewPassword){
+        String User__ID =(String)session.getAttribute("UserId");
+        Users user = userServices.getUserViaUserID(User__ID);
+        if(user.getPassword().equals(oldPassword)){
+            if(RnewPassword.equals(NewPassword)){
+                userServices.updatePassword(RnewPassword, User__ID);   
+            }
+            else{
+                session.setAttribute("PasswordNotMatch", "Password Not Match");
+                return "redirect:/employee/settings";
+            }
+        }
+        else{
+            session.setAttribute("errorPassword", "Issue Found");
+            return "redirect:/employee/settings";
+        }
+        return "redirect:/employee/password-changed";
+    }
     
 
     @GetMapping(value = "/profile")
     public String profile(){
         return "/EmployeeDashboard/EmployeeProfile";
     }
+
+
     @GetMapping(value = "/token")
     public String token(HttpSession session){
         String User__ID =(String)session.getAttribute("UserId");
@@ -79,9 +114,9 @@ public class EmployeeController {
         token.setStatus("Under Review");
         tokenServices.createtoken(token);
         SimpleMailMessage messages = new SimpleMailMessage();
-        messages.setFrom("noreply.undergroundcoders@gmail.com");
+        messages.setFrom("workmate.system@gmail.com");
         messages.setTo(token.getEmail());
-        messages.setText("Hi"+token.getName() + "! \nYour Token Has been Submited\nYour Token is Under Review\nYour Token Number:"+token.getToken_Number()+"\nToken Id :"+token.getToken_id()+"\nYour Token Type is"+tokenType);
+        messages.setText("Hi "+token.getName() + "! \nyour Token Has been Submited\nyour Token is Under Review\nyour Token Number:"+token.getToken_Number()+"\nToken Id :"+token.getToken_id()+"\nyour Token Type is"+tokenType+"Our team will carefully evaluate your token to ensure that it meets our quality standards and is appropriate for our platform.");
         messages.setSubject("Token Raised |"+token.getToken_Number());
         mailSender.send(messages);
         return "redirect:/employee/token";
@@ -95,4 +130,11 @@ public class EmployeeController {
         return "/EmployeeDashboard/token-details";
     }
 
+
+    @GetMapping(value = "/delete/token/{Token_Number}")
+    public String delete(@PathVariable("Token_Number")String tokenNumber,Model model){
+        System.out.println(tokenNumber);
+        tokenServices.deleteToken(tokenNumber);
+        return "redirect:/employee/token";
+    }
 }

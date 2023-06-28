@@ -13,6 +13,105 @@
     <link href=".././dist/css/tabler-payments.min.css" rel="stylesheet"/>
     <link href=".././dist/css/tabler-vendors.min.css" rel="stylesheet"/>
     <link href=".././dist/css/demo.min.css" rel="stylesheet"/>
+    <style>
+      .id-card-holder {
+			width: 225px;
+		    padding: 4px;
+		    margin: 0 auto;
+		    background-color: #1f1f1f;
+		    border-radius: 5px;
+		    position: relative;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		}
+.id-card-holder:after {
+		    content: '';
+		    width: 7px;
+		    display: block;
+		    background-color: #0a0a0a;
+		    height: 100px;
+		    position: absolute;
+		    top: 105px;
+		    border-radius: 0 5px 5px 0;
+		}
+.id-card-holder:before {
+		    content: '';
+		    width: 7px;
+		    display: block;
+		    background-color: #0a0a0a;
+		    height: 100px;
+		    position: absolute;
+		    top: 105px;
+		    left: 222px;
+		    border-radius: 5px 0 0 5px;
+		}
+.id-card {
+			
+			background-color: #fff;
+			padding: 10px;
+			border-radius: 10px;
+			text-align: center;
+
+		}
+.id-card img {
+			margin: 0 auto;
+		}
+    .id-card .header img {
+			width: 100px;
+    		margin-top: 15px;
+		}
+    .id-card .photo img {
+			width: 80px;
+    		margin-top: 15px;
+		}
+    .id-card h2 {
+			font-size: 15px;
+			margin: 5px 0;
+		}
+    .id-card h3 {
+			font-size: 12px;
+			margin: 2.5px 0;
+			font-weight: 300;
+		}
+.qr-code img {
+			width: 50px;
+		} 
+    .id-card p {
+			font-size: 5px;
+			margin: 2px;
+		}
+.id-card-hook {
+			background-color: black;
+		    width: 70px;
+		    margin: 0 auto;
+		    height: 15px;
+		    border-radius: 5px 5px 0 0;
+		}
+.id-card-hook:after {
+			content: '';
+		    background-color: white;
+		    width: 47px;
+		    height: 6px;
+		    display: block;
+		    margin: 0px auto;
+		    position: relative;
+		    top: 6px;
+		    border-radius: 4px;
+		}
+.id-card-tag-strip {
+			width: 45px;
+		    height: 40px;
+		    background-color: #054A91;
+		    margin: 0 auto;
+		    border-radius: 5px;
+		    position: relative;
+		    top: 9px;
+		    z-index: 1;
+		    border: 1px solid #054A91;
+		}
+
+
+
+    </style>
   </head>
   <body >
     <div class="wrapper">
@@ -36,11 +135,7 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Set status</a>
-                <a href="#" class="dropdown-item">Profile & account</a>
-                <a href="#" class="dropdown-item">Feedback</a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">Settings</a>
+                <a href="/employee/settings" class="dropdown-item">Settings</a>
                 <a href="/logout" class="dropdown-item">Logout</a>
               </div>
             </div>
@@ -86,25 +181,6 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/employee/tasks" >
-                      <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-
-                 
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <path d="m7.5 4.21 4.5 2.6 4.5-2.6"></path>
-                                <path d="M7.5 19.79V14.6L3 12"></path>
-                                <path d="m21 12-4.5 2.6v5.19"></path>
-                                <path d="M3.27 6.96 12 12.01l8.73-5.05"></path>
-                                <path d="M12 22.08V12"></path>
-                              </svg>
-                      </span>
-                      <span class="nav-link-title">
-                        Tasks
-                      </span>
-                    </a>
-                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/attendence" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -164,7 +240,7 @@
         <div class="page-body">
           <div class="container-xl">
             <div class="row">
-              <div class="col-lg-8 col-12">
+              <div class="col-lg-6 col-12">
                 <div class="col-auto">
                     <span class="avatar avatar-lg me-2 mb-3">${userInfo.getName().charAt(0)}</span>
                   </div>
@@ -189,6 +265,36 @@
                   </div>
                
               </div>
+              <div class="col-lg-6">
+                <div class="id-card-tag"></div>
+	<div class="id-card-tag-strip"></div>
+	<div class="id-card-hook"></div>
+	<div class="id-card-holder">
+		<div class="id-card user-select-none">
+      <img src=".././static/logo.svg"  height="10" alt="">
+			<div class="header mt-3">
+			  <span class="avatar avatar-lg me-2 mb-3">${userInfo.getName().charAt(0)}</span>
+			</div>
+			
+			<h2 class="user-select-none">${userInfo.getName()}</h2>
+		
+			<h3 class="user-select-none">${userInfo.getEmployeeRole()}</h3>
+      <h3 class="user-select-none">${userInfo.getUserId()}</h3>
+      <!-- <div class="qr-code">
+        <div class="photo">
+          <img src="https://i.imgur.com/5WmGvAG.png">
+        </div>
+			</div> -->
+      <div id="qrcode" class="mt-3 mb-4 user-select-none"></div>
+     
+      <!-- <hr>
+			<p><strong>NIIT University</strong> Neemrana, NH-8 Delhi-Jaipur highway <p>
+			<p>District Alwar, Rajasthan <strong>301705</strong></p>
+			<p>Ph: 01494-660600, 7073222393</p> -->
+
+		</div>
+	</div>
+              </div>
             </div>
           </div>
         </div>
@@ -202,5 +308,24 @@
     <script src=".././dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <!-- Tabler Core -->
     <script src=".././dist/js/tabler.min.js"></script>
+    <script src=".././dist/js/qrcode.min.js"></script>
+    <script type="text/javascript">
+
+
+var id = "${userInfo.getUserId()}";
+var name = "${userInfo.getName()}";
+var role = "${userInfo.getEmployeeRole()}";
+var verifyed = true;
+console.log(name ,"sdas ")
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: id+' | '+name +' | '+role +' | Verified Account',
+    width: 90,
+    height: 90,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+      </script>
+    
   </body>
 </html>

@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary position-absolute">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="./static/logo.svg" height="15" alt="">
+          <img src="<%=request.getContextPath()%>/static/logo.svg" height="15" alt="">
         </a>
       </div>
     </nav>
@@ -45,19 +45,19 @@
       <div class="container py-4">
         <div class="row align-items-center">
           <div class="col-lg-4">
-            <form class="card card-md shadow" action="/login" method="POST" autocomplete="off">
+            <form class="card card-md shadow" action="/login" method="POST">
               <div class="card-body">
                 <h2 class="card-title text-center mb-4">Login to your account</h2>
                 <div class="mb-3">
                   <label class="form-label">Email address or Employee ID</label>
-                  <input type="text" name="email" class="form-control" placeholder="Enter email or Employee id" autocomplete="off">
+                  <input type="text" name="email" class="form-control" placeholder="Enter email or Employee id" autocomplete="on">
                 </div>
                 <div class="mb-2">
                   <label class="form-label">
                     Password
                   </label>
                   <div class="input-group input-group-flat">
-                    <input type="password" class="form-control"  placeholder="Password" name="password"  autocomplete="off">
+                    <input type="password" class="form-control"  placeholder="Password" name="password"  autocomplete="on">
                   </div>
                 </div>
 

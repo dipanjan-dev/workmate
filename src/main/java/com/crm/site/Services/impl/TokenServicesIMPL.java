@@ -46,5 +46,29 @@ public class TokenServicesIMPL implements TokenServices  {
     }
 
 
+    @Override
+    public void deleteToken(String Token_Number) {
+        tokenRepository.deleteToken(Token_Number);
+    }
+
+
+    @Override
+    public void updateTokenStatus(String Token_Number,String Status) {
+      tokenRepository.updateTokenStatus(Token_Number,Status);
+    }
+
+
+    @Override
+    public List<Token> SearchToken(String SearchData) {
+      List<Token> tokens = tokenRepository.SearchToken(SearchData);
+      if(tokens.isEmpty()){
+        return null;
+      }
+      else{
+        return tokens;
+      }
+    }
+
+
  
 }
